@@ -1,1 +1,0 @@
-{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA,KACE,YAAa,CACb,YAAa,CACb,0BAA2B,CAC3B,oBACF,CAEA,OACE,YAAa,CACb,WACF","file":"main.2d024635.chunk.css","sourcesContent":[".App {\n  height: 100vh;\n  display: flex;\n  justify-content: flex-start;\n  align-items: flex-end;\n}\n\n.joker {\n  height: 100px;\n  width: 100px;\n}"]}
