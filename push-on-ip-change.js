@@ -1,12 +1,12 @@
 const os = require('os');
 const fs = require('fs');
 const { exec } = require('child_process');
-const { address } = require('./src/config')
-const {decrypt, encrypt} = require('./src/utils')
+const { address } = require('./src/config');
+const {decrypt, encrypt} = require('./src/utils');
 
 const COMPACT_REGEXP = /\s+/g;
 const compact = (str) => str.replace(COMPACT_REGEXP, ' ');
-const myexec = (command) => {
+const myExec = (command) => {
     return new Promise((resolve, reject) => {
         exec(compact(command), (err, stdout, stderr) => {
             if (err) reject(err);
@@ -17,15 +17,14 @@ const myexec = (command) => {
 }
 const getUrl = (ip) => `http://${ip}:9527`;
 
-const startToPush = (ip) => {
-    console.log(ip)
+const startToPush = (newAddress) => {
     const data = `module.exports = ${JSON.stringify({
-        address: encrypt(getUrl(ip))
+        address: encrypt(newAddress)
     })}`
-    fs.writeFileSync('domain.json', data);
+    fs.writeFileSync('./src/config', data);
     console.log('write file success')
 
-    myexec(`./deploy.sh`).catch(console.log)
+    myExec(`./deploy.sh`).catch(console.log)
 }
 
 const getIp = () => {
@@ -37,21 +36,25 @@ const getIp = () => {
     }
 
     const ipV4 = wlan.find(v => v.family === 'IPv4')
-    if(!ipV4 || decrypt(address) === getUrl(ipV4.address)) {
+    const oldAddress = decrypt(address);
+    const newAddress = getUrl(ipV4.address);
+    console.log('old address: ', oldAddress);
+    console.log('new address: ', )
+    if(!ipV4 || oldAddress === newAddress) {
         console.log('stop')
         return null;
     }
-    return ipV4.address
+    return newAddress
 
 }
 
 const job = () => {
     console.log('start...')
-    const ip = getIp()
-    if (!ip) {
+    const newAddress = getIp()
+    if (!newAddress) {
         return;
     }
-    startToPush(ip)
+    startToPush(newAddress)
 }
 
 job();
