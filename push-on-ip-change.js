@@ -21,7 +21,7 @@ const startToPush = (newAddress) => {
     const data = `module.exports = ${JSON.stringify({
         address: encrypt(newAddress)
     })}`
-    fs.writeFileSync('./src/config', data);
+    fs.writeFileSync('./src/config.js', data);
     console.log('write file success')
 
     myExec(`./deploy.sh`).catch(console.log)
