@@ -11,7 +11,9 @@ npm run build
 #git push origin `git subtree split --prefix build main`:mater --force
 
 ## 1. go to build which is the master branch
-cd build
+cd dist
+rm -rf *
+mv ../build/ .
 git add .
 git commit -m 'update'
-git push
+git push -u origin master -f
