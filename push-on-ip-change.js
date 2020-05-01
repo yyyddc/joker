@@ -39,7 +39,7 @@ const getIp = () => {
     const oldAddress = decrypt(address);
     const newAddress = getUrl(ipV4.address);
     console.log('old address: ', oldAddress);
-    console.log('new address: ', )
+    console.log('new address: ', newAddress)
     if(!ipV4 || oldAddress === newAddress) {
         console.log('stop')
         return null;
