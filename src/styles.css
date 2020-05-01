@@ -1,0 +1,11 @@
+.App {
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.joker {
+  height: 100px;
+  width: 100px;
+}
